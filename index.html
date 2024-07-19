@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kasir Sederhana</title>
+  
+</head>
+<body>
+ 
+  <h1> <img src="gambar/Logodua-removebg-preview.png" alt="queen" width="100px" height="100px">
+<br>
+    QUEEN SHOP </h1>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasir</title>
+    <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Jam dan Tanggal</title>
+          
+      </head>
+      <body>
+          
+      <div class="clock-container">
+          <div class="time" id="clockTime"> 00:00:00</div>
+          <div class="date" id="clockDate"> 01/01/2000</div>
+      </div>
+      <body>
+      <script>
+          function updateClock() {
+              var now = new Date();
+              
+              var hours = now.getHours();
+              var minutes = now.getMinutes();
+              var seconds = now.getSeconds();
+              
+              var day = now.getDate();
+              var month = now.getMonth() + 1; // Bulan dimulai dari 0
+              var year = now.getFullYear();
+      
+              // Menambahkan angka nol di depan angka satuan
+              if (hours < 10) hours = '0' + hours;
+              if (minutes < 10) minutes = '0' + minutes;
+              if (seconds < 10) seconds = '0' + seconds;
+              if (day < 10) day = '0' + day;month
+              if (month < 10) month = '0' + month;
+      
+              // Format waktu dan tanggal
+              var currentTime = hours + ':' + minutes + ':' + seconds;
+              var currentDate = day + '/' + month + '/' + year;
+      
+              // Menampilkan waktu dan tanggal
+              document.getElementById ('clockTime').textContent = currentTime;
+              document.getElementById('clockDate').textContent = currentDate;
+          }
+      
+          // Memperbarui jam setiap detik
+          setInterval(updateClock, 1000);
+      
+          // Memanggil fungsi updateClock segera setelah halaman dimuat
+          updateClock();
+      </script>
+
+  <form id="form-belanja">
+    <label for="nama-produk">Nama Produk:</label>
+    <input type="text" id="nama-produk" name="nama-produk" required>
+
+    <label for="jumlah">Jumlah:</label>
+    <input type="number" id="jumlah" name="jumlah" min="1" value="1" required>
+
+    <button type="button" onclick="tambahProduk()">Tambah</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nama Produk</th>
+        <th>Jumlah</th>
+        <th>Harga Satuan</th>
+        <th>Harga Total</th>
+      </tr>
+    </thead>
+    <tbody id="keranjang"></tbody>
+  </table>
+  <div class="container">
+    <h1></h1>
+
+    <p>Total: <span id="total">0</span></p>
+
+    <label for="totalBelanja">Total Belanja:</label>
+    <input type="number" id="totalBelanja" min="0" required>
+
+    <label for="uangBayar">Uang Bayar:</label>
+    <input type="number" id="uangBayar" min="0" required>
+
+    <button onclick="hitungKembalian()">Hitung Kembalian</button>
+
+    <div class="hasil" id="hasil">
+        <p class="label-hasil">Uang Kembalian:</p>
+        <p id="uangKembalian"></p>
+    </div>
+    <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilihan Pembayaran</title>
+</head>
+<body>
+    <h1></h1>
+    <form action="proses_pembayaran.php" method="post">
+        <label for="metode_pembayaran">Metode Pembayaran:</label>
+        <select id="metode_pembayaran" name="metode_pembayaran">
+            <option value="tunai">Tunai</option>
+            <option value="kartu_debit">Kartu Debit</option>
+            <option value="kartu_kredit">Kartu Kredit</option>
+            <option value="e-wallet">E-wallet</option>
+        </select>
+        <br><br>
+       
+    <a href="berhasil.html"> Proses Pembayaran </a>
+
+  <br>
+    
+   
+    
+</div>
+
+
+<script>
+    function hitungKembalian() {
+        const totalBelanja = parseFloat(document.getElementById('totalBelanja').value);
+        const uangBayar = parseFloat(document.getElementById('uangBayar').value);
+        localStorage.setItem('uangBayar', JSON.stringify(uangBayar));
+
+        if (uangBayar < totalBelanja) {
+            alert('Uang Bayar tidak cukup!');
+            return;
+        }
+
+        const uangKembalian = uangBayar - totalBelanja;
+        document.getElementById('uangKembalian').textContent = formatRupiah(uangKembalian);
+        localStorage.setItem('uangKembalian', JSON.stringify(uangKembalian));
+
+    }
+</script>
+ 
+
+  <script>
+    const produk = {
+      "Micellar Water Wardah": 25000,
+      "Micellar Water Facetology": 40000,
+      "Micellar Water The Originote": 40000,
+      "Micellar Water Skintific": 37000,
+      "Micellar Water Ponds": 22.800,
+      "Lipcream Hanasui": 21000,
+      "Lipcream OMG": 18000,
+      "Lipcream Pinkflash": 15000,
+      "Lipcream Implora": 16000,
+      "Lipcream Wardah": 35000,
+      "Cushion Hanasui": 37000,
+      "Cushion Luxcrime": 80000,
+      "Cushion Somethinc": 145000,
+      "Cushion Wardah": 90000,
+      "Cushion Bioaqua": 75000,
+      "Sunscreen Wardah": 30000,
+      "Sunscreen Azarine": 34000,
+      "Sunscreen Facetology": 40000,
+      "Sunscreen YOU": 45000,
+      "Sunscreen Emina": 25000,
+      "Mascara XiuXiu": 25000,
+      "Mascara Maybelline": 160000,
+      "Mascara Wardah": 51000,
+      "Mascara Hanasui": 50000,
+      "Mascara O TWO O": 65000,
+      "Toner Wardah": 25000,
+      "Toner Skintific": 45000,
+      "Toner The Originote": 36000,
+      "Toner Azarine": 55000,
+      "Toner Emina": 34000,
+      "Moisturizer The Originote": 40000,
+      "Moisturizer Skintific": 39000,
+      "Moisturizer Glad2Glow": 41000,
+      "Moisturizer Emina": 23000,
+      "Moisturizer Pigeon": 12000,
+      "Serum Wardah": 30000,
+      "Serum Azarine": 34000,
+      "Serum G2G": 55000,
+      "Serum The Originote": 30000,
+      "Serum Implora": 15000,
+      "Facewash Wardah": 35000,
+      "Facewash COSRX": 41000,
+      "Facewash Glad2Glow": 35000,
+      "Facewash YOU": 32000,
+      "Facewash Ponds": 47000,
+      "Mascara Pinkflash": 25000,
+      "Macara O TWO O": 37000,
+      "Mascara Focallure": 30000,
+      "Mascara Mybelline": 169000,
+      "Mascara Xiu Xiu": 35000,
+      "Blush On Sea Make Up": 44000,
+      "Blush On Focallure": 34000,
+      "Blush On Pink Flash": 16000,
+      "Blush On Somethink": 67000,
+      "Blush On Azarine": 149000,
+      "Eye Shadow Pink Flash": 62000,
+      "Eye Shadow Focallure": 50000,
+      "Eye Shadow Somethinc": 117000,
+      "Eye Shadow Brasov": 31000,
+      "Eye Shadow Azarine": 48000,
+      "Eyebrow Sea Make Up": 38000,
+      "Eyebrow Somethinkc": 40000,
+      "Eyebrow Luxcrime": 47000,
+      "Eyebrow Focallure": 26000,
+      "Eyebrow Pink Flash": 16000,
+      "Eyeliner Pink Flash": 20000,
+      "Eyeliner Focallure": 37000,
+      "Eyeliner Dazzle Me": 27000,
+      "Eyeliner Somethinc": 53000,
+      "Eyeliner Wardah": 47000,
+      "Masker Glad2Glow": 32000,
+      "Masker Skintific": 88000,
+      "Masker The Originote": 32000,
+      "Masker Neogent": 280000,
+      "Masker Himalaya": 40000,
+      "Foundation Make Over": 129000,
+      "Foundation YOU": 88000,
+      "Foundation Loreal": 145000,
+      "Foundation Wardah": 52000,
+      "Foundation Pixy": 57000,
+      "Concealer Pixy": 36000,
+      "Concealer Focallure": 45000,
+      "Concealer Wardah": 42000,
+      "Concealer Esqa": 50000,
+      "Concealer Somethinkc":67000,
+      "Setting Spray Dezzle Me": 40000,
+      "Setting Spray Somethinkc": 55000,
+      "Setting Spray Focallure": 59000,
+      "Setting Spray Pink Flash": 45000,
+      "Setting Spray Pixy": 30000,
+      "Lotion Marina": 20000,
+      "Lotion Citra": 25000,
+      "Lotion Grace And Glow": 40000,
+      "Lotion Lavojoy": 55000,
+      "Lotion Npure":80000,
+      "Scrub Marina": 12000,
+      "Scrub Sinzui": 15000,
+      "Scrub Purbasari": 15000,
+      "Scrub Grace And Glow": 79000,
+      "Scrub Herborist": 25000,
+    };
+
+    let keranjang = [];
+
+    function tambahProduk() {
+      const namaProduk = document.getElementById('nama-produk').value;
+      const jumlah = parseInt(document.getElementById('jumlah').value);
+
+      if (!produk[namaProduk]) {
+        alert('Produk tidak ditemukan!');
+        return;
+      }
+
+      const hargaSatuan = produk[namaProduk];
+      const hargaTotal = jumlah * hargaSatuan;
+
+      const item = {
+        namaProduk: namaProduk,
+        jumlah: jumlah,
+        hargaSatuan: hargaSatuan,
+        hargaTotal: hargaTotal
+      };
+
+      keranjang.push(item);
+
+      updateKeranjang();
+      updateTotal();
+    }
+
+    function updateKeranjang() {
+      const tbody = document.getElementById('keranjang');
+      tbody.innerHTML = '';
+
+      keranjang.forEach((item, index) => {
+        const row = tbody.insertRow();
+
+        const namaProdukCell = row.insertCell();
+        namaProdukCell.textContent = item.namaProduk;
+
+        const jumlahCell = row.insertCell();
+        jumlahCell.textContent = item.jumlah;
+
+        const hargaSatuanCell = row.insertCell();
+        hargaSatuanCell.textContent = formatRupiah(item.hargaSatuan);
+
+        const hargaTotalCell = row.insertCell();
+        hargaTotalCell.textContent = formatRupiah(item.hargaTotal);
+      });
+      localStorage.setItem('keranjang', JSON.stringify(keranjang));
+    }
+
+function updateTotal() {
+    let total = 0;
+    keranjang.forEach(item => {
+        total += item.hargaTotal;
+    });
+
+    document.getElementById('total').textContent = formatRupiah(total);
+    document.getElementById('totalBelanja').value = total;
+}
+
+    function formatRupiah(angka) {
+      return '' + angka.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+    }
+  </script>
+</body>
+
+</html>
+
+<style>
+  
+      body {
+      font-family: sans-serif;
+      background-color: rgb(230, 165, 176);
+    }
+    h1{
+      font-family: 'Times New Roman', Times, serif ;
+      color: black;
+      text-align: center;
+      text-shadow: white 1px 2px  ;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+    th {
+      text-align: left;
+    }
+    h1{
+      float: center;
+    }
+  img{
+    float: center;
+  }
+  a{
+    background-color: #cfb6c3;
+            color: rgb(2, 2, 2);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+  }
+</style>
+
